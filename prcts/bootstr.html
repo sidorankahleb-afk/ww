@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Admin Dashboard Concept</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #f4f7f9;
+            font-family: 'Inter', sans-serif;
+            color: #334155;
+            padding-top: 40px;
+        }
+
+        h2 {
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #1e293b;
+            border-left: 5px solid #3b82f6;
+            padding-left: 15px;
+        }
+
+        /* Общий стиль для всех блоков */
+        .block {
+            background: #ffffff;
+            border: none;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            overflow: hidden;
+        }
+
+        .block:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Мини-карточки статистики */
+        .stat-card {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            padding: 15px 5px;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        /* Стили для вложенных блоков */
+        .nested-container {
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            margin-top: 15px;
+        }
+
+        .nested {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            margin-top: 10px;
+            font-size: 11px;
+            padding: 10px;
+        }
+
+        /* Блок с изображением */
+        .img-block {
+            padding: 0;
+        }
+        
+        .img-block img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .img-caption {
+            padding: 10px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        /* Вспомогательные классы */
+        .text-muted-custom { color: #94a3b8; font-size: 12px; display: block; margin-top: 5px; }
+        .row-flex { display: flex; flex-wrap: wrap; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Панель мониторинга систем</h2>
+
+    <div class="row">
+        <div class="col-xs-6 col-md-3">
+            <div class="block stat-card">
+                CPU: 24% <span class="text-muted-custom" style="color: #bfdbfe;">Стабильно</span>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <div class="block stat-card" style="background: linear-gradient(135deg, #10b981, #059669);">
+                RAM: 4.2 GB <span class="text-muted-custom" style="color: #d1fae5;">Оптимально</span>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <div class="block stat-card" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                DISK: 88% <span class="text-muted-custom" style="color: #fef3c7;">Внимание!</span>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <div class="block stat-card" style="background: linear-gradient(135deg, #6366f1, #4f46e5);">
+                NET: 1 Gbps <span class="text-muted-custom" style="color: #e0e7ff;">Максимум</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="block">
+                <strong>Глобальный отчет трафика</strong>
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <div class="block nested-container">
+                            <img src="graf.jpg" alt="График" class="img-rounded" style="width: 100%; margin-bottom: 10px;">
+                            <p class="text-muted-custom">Визуализация входящих пакетов за 24ч</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <div class="block nested" style="background: #1e293b;">Сервер: Токио (Active)</div>
+                        <div class="block nested hidden-sm" style="background: #64748b;">Резерв: Сингапур (Idle)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-sm-4">
+            <div class="block img-block">
+                <img src="https://picsum.photos/seed/work/300/320" alt="Пользователь">
+                <div class="img-caption">
+                    Александр Иванов <br>
+                    <small class="text-primary">Главный администратор</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 block hidden-xs" style="text-align: left;">
+            <strong>Логи безопасности</strong>
+            <hr style="margin: 10px 0;">
+            <code style="font-size: 11px;">[14:20:01] Login success from IP 192.168.1.1</code><br>
+            <code style="font-size: 11px;">[14:25:44] Database backup completed</code>
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <div class="block" style="border-top: 4px solid #ef4444;">
+                <span class="glyphicon glyphicon-alert" style="font-size: 24px; color: #ef4444;"></span>
+                <p>Ошибки: 0</p>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <div class="block" style="border-top: 4px solid #10b981;">
+                <span class="glyphicon glyphicon-ok-circle" style="font-size: 24px; color: #10b981;"></span>
+                <p>Uptime: 99.9%</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стаж и дни между датами</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f4f4f4; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { text-align: center; }
+        input, button { padding: 10px; margin: 5px; font-size: 16px; }
+        button { background: #0066ff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+        th { background: #eee; }
+        .young { background: #fff7cc; }
+        .exp { background: #d4f4dd; }
+        .vet { background: #cce6ff; }
+        #result { margin: 20px 0; font-size: 18px; font-weight: bold; }
+        .chart-container { height: 300px; margin: 30px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Калькулятор рабочих дней и стажа</h1>
+
+        <h2>1. Рабочие и выходные дни между датами</h2>
+        <div>
+            <input type="date" id="start" value="2026-03-01">
+            <input type="date" id="end" value="2026-04-03">
+            <button onclick="calcDays()">Рассчитать</button>
+        </div>
+        <div id="result"></div>
+
+        <h2>2. Стаж сотрудников</h2>
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>Фамилия</th>
+                    <th>Дата приёма</th>
+                    <th>Стаж (лет)</th>
+                    <th>Категория</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <h2>3. Диаграмма категорий</h2>
+        <div class="chart-container">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // Данные сотрудников 
+        const employees = [
+            { name: "Иванов", date: "2025-06-01" },
+            { name: "Петров", date: "2024-01-15" },
+            { name: "Сидорова", date: "2022-09-01" },
+            { name: "Кузнецов", date: "2020-02-20" },
+            { name: "Смирнова", date: "2019-11-05" },
+            { name: "Васильев", date: "2023-12-01" }
+        ];
+
+        // Расчёт стажа в полных годах
+        function getYears(hireDate) {
+            const hire = new Date(hireDate);
+            const now = new Date();
+            let years = now.getFullYear() - hire.getFullYear();
+            if (now.getMonth() < hire.getMonth() || 
+               (now.getMonth() === hire.getMonth() && now.getDate() < hire.getDate())) {
+                years--;
+            }
+            return Math.max(0, years);
+        }
+
+        // Заполнение таблицы
+        function fillTable() {
+            const tbody = document.querySelector('#table tbody');
+            tbody.innerHTML = '';
+            
+            let young = 0, exp = 0, vet = 0;
+
+            employees.forEach(emp => {
+                const years = getYears(emp.date);
+                let cat = '', cls = '';
+                
+                if (years < 1) { cat = 'молодой'; cls = 'young'; young++; }
+                else if (years <= 5) { cat = 'опытный'; cls = 'exp'; exp++; }
+                else { cat = 'ветеран'; cls = 'vet'; vet++; }
+
+                const row = `<tr>
+                    <td>${emp.name}</td>
+                    <td>${emp.date}</td>
+                    <td>${years}</td>
+                    <td class="${cls}">${cat}</td>
+                </tr>`;
+                tbody.innerHTML += row;
+            });
+
+            // Диаграмма
+            drawChart(young, exp, vet);
+        }
+
+        // Калькулятор дней
+        function calcDays() {
+            const start = new Date(document.getElementById('start').value);
+            const end = new Date(document.getElementById('end').value);
+            
+            if (!start || !end || start > end) {
+                document.getElementById('result').innerHTML = '❌ Проверьте даты';
+                return;
+            }
+
+            let work = 0, weekend = 0;
+            let current = new Date(start);
+
+            while (current <= end) {
+                const day = current.getDay();
+                if (day === 0 || day === 6) weekend++;
+                else work++;
+                current.setDate(current.getDate() + 1);
+            }
+
+            document.getElementById('result').innerHTML = `
+                Рабочих дней: <b>${work}</b> | 
+                Выходных дней: <b>${weekend}</b> | 
+                Всего: <b>${work + weekend}</b>
+            `;
+        }
+
+        // круговая диаграмма
+        let chart;
+        function drawChart(young, exp, vet) {
+            const ctx = document.getElementById('myChart');
+            if (chart) chart.destroy();
+            
+            chart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Молодой', 'Опытный', 'Ветеран'],
+                    datasets: [{
+                        data: [young, exp, vet],
+                        backgroundColor: ['#ffeb3b', '#4caf50', '#2196f3']
+                    }]
+                },
+                options: { responsive: true }
+            });
+        }
+
+        // Запуск при загрузке
+        window.onload = fillTable;
+    </script>
+</body>
+</html>

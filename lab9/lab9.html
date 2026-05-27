@@ -1,0 +1,42 @@
+$(document).ready(function() {
+
+    // 1. Три разных способа выбрать logo.jpg (кроме исходного)
+    $('img[src*="logo.jpg"]').hide();                    // ваш исходный способ
+
+    $('img[src$="logo.jpg"]').hide(1000);                // способ 1: заканчивается на logo.jpg
+
+    $('img').filter('[src*="logo.jpg"]').hide(1500);     // способ 2: через .filter()
+
+    // 2. Скрыть все картинки КРОМЕ первой за 5 секунд
+    $('img').not(':first').hide(5000);
+
+    // 3. Второй мотоцикл (moto2.jpg) + анимация рамки + скрытие шапки
+    $('img[src*="moto2.jpg"]')
+        .css('border', '1px solid #333333')           // начальная тонкая рамка
+        .animate({ borderWidth: '5px' }, 5000)        // увеличиваем до 5px за 5 секунд
+        .queue(function(next) {
+            $('header, #header, .header').fadeOut(5000); // плавно скрываем шапку
+            next();
+        });
+
+    // 4. Добавляем новый абзац в конец <body> и стилизуем его (цепочкой)
+    $('<p>Это новый абзац, добавленный динамически с помощью jQuery.</p>')
+        .attr('id', 'newparagraph')
+        .appendTo('body')
+        .css({
+            'background-color': 'black',
+            'color': 'white',
+            'padding': '20px',
+            'margin': '15px 0',
+            'font-size': '16px'
+        });
+
+    // Бонус: функция изменения атрибута (как просили раньше)
+    function changeAttr(id, attr, value) {
+        $('#' + id).attr(attr, value);
+    }
+
+    // Пример использования функции:
+    // changeAttr('newparagraph', 'title', 'Новый параграф');
+
+});

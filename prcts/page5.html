@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Страница 5 - Позиционирование</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(to bottom, #f0f9ff, #e0f2fe);
+            color: #333;
+        }
+
+        header {
+            background: #1e40af;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .top-menu {
+            display: flex;
+            justify-content: center;
+        }
+
+        .top-menu ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .top-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            font-size: 1.1rem;
+            display: block;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .top-menu li:hover a {
+            background: #60a5fa;
+            transform: scale(1.12);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            color: #1e3a8a;
+            text-align: center;
+            font-size: 2.8rem;
+            margin: 40px 0 20px;
+        }
+
+        .content-block {
+            background: white;
+            margin: 30px auto;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            max-width: 1100px;
+            position: relative;
+        }
+
+        .table-pos {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+        }
+
+        .table-pos th, .table-pos td {
+            padding: 14px;
+            border: 1px solid #bae6fd;
+            text-align: left;
+        }
+
+        .table-pos th {
+            background: #0ea5e9;
+            color: white;
+        }
+
+        /* Static - normal flow */
+        .static-box {
+            background: #e0f2fe;
+            padding: 20px;
+            border: 3px solid #38bdf8;
+            margin-bottom: 20px;
+        }
+
+        /* Relative */
+        .relative-box {
+            position: relative;
+            top: 25px;
+            left: 60px;
+            background: #a5f3fc;
+            padding: 25px;
+            border: 3px solid #22d3ee;
+            margin-bottom: 40px;
+            width: 420px;
+        }
+
+        /* Absolute inside relative container */
+        .absolute-container {
+            position: relative;
+            height: 280px;
+            background: #f3e8ff;
+            border: 3px dashed #c084fc;
+            margin: 30px 0;
+        }
+
+        .absolute-box {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            background: #c026d3;
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(192, 38, 211, 0.4);
+        }
+
+        /* Fixed element (besides the ad) */
+        .fixed-corner {
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            background: #eab308;
+            color: #1e3a8a;
+            padding: 15px 25px;
+            border-radius: 50%;
+            font-weight: bold;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            z-index: 999;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: #1e40af;
+            color: white;
+            margin-top: 80px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav class="top-menu">
+                <ul>
+                    <li><a href="page4.html">Страница 4 — Margin</a></li>
+                    <li><a href="page5.html">Страница 5 — Позиционирование</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>Позиционирование в CSS</h1>
+
+        <div class="content-block">
+            <h2>Все типы позиционирования</h2>
+
+            <!-- Static -->
+            <div class="static-box">
+                <strong>static</strong> — нормальный поток (по умолчанию)
+            </div>
+
+            <!-- Relative -->
+            <div class="relative-box">
+                <strong>position: relative;</strong><br>
+                Этот блок смещён на 25px сверху и 60px слева относительно своего нормального места.
+            </div>
+
+            <!-- Container for absolute -->
+            <div class="absolute-container">
+                <div class="absolute-box">
+                    <strong>position: absolute;</strong><br>
+                    Относительно родителя
+                </div>
+                <p style="padding:20px;">Родительский контейнер с position: relative</p>
+            </div>
+
+            <table class="table-pos">
+                <tr>
+                    <th>Значение</th>
+                    <th>Описание</th>
+                </tr>
+                <tr>
+                    <td>static</td>
+                    <td>Обычный поток документа</td>
+                </tr>
+                <tr>
+                    <td>relative</td>
+                    <td>Смещение относительно своего места</td>
+                </tr>
+                <tr>
+                    <td>absolute</td>
+                    <td>Относительно ближайшего позиционированного предка</td>
+                </tr>
+                <tr>
+                    <td>fixed</td>
+                    <td>Относительно окна браузера</td>
+                </tr>
+            </table>
+
+            <p><strong>float</strong> используется для обтекания (см. страницу 4).</p>
+        </div>
+    </div>
+
+    <!-- Fixed corner info -->
+    <div class="fixed-corner">
+        FIXED
+    </div>
+
+    <footer>
+        <p>Лабораторная работа №10 • Вариант 4 • Страница 5</p>
+        <p>Использованы: static, relative, absolute, fixed, float + адаптивная вёрстка</p>
+    </footer>
+
+</body>
+</html>

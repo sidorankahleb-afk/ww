@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Культовые книги — Меню с указателем</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f1eb;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Горизонтальное меню */
+        .menu {
+            background: #2c2c2c;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .menu-list {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .menu-item {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .menu-link {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .menu-link:hover {
+            color: #ffd700;
+            transform: translateY(-2px);
+        }
+
+        /* Указатель — буква */
+        .indicator {
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffd700;
+            color: #2c2c2c;
+            font-weight: bold;
+            font-size: 1.3rem;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            transition: all 0.4s ease;
+        }
+
+        /* Контент */
+        .content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            min-height: 100vh;
+            padding: 80px 0;
+            display: none;
+            align-items: center;
+            gap: 50px;
+            scroll-margin-top: 100px;
+        }
+
+        .section.active {
+            display: flex;
+        }
+
+        .book-image {
+            width: 380px;
+            height: 520px;
+            object-fit: cover;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            border-radius: 8px;
+            transition: transform 0.5s ease;
+        }
+
+        .section:hover .book-image {
+            transform: scale(1.03);
+        }
+
+        .book-info {
+            max-width: 500px;
+        }
+
+        .book-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #2c2c2c;
+        }
+
+        .book-author {
+            font-size: 1.4rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .book-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Горизонтальное меню -->
+    <nav class="menu">
+        <div class="menu-container">
+            <ul class="menu-list">
+                <li class="menu-item">
+                    <a href="#book1" class="menu-link" data-index="1">
+                        <span class="indicator">A</span>
+                        1984
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#book2" class="menu-link" data-index="2">
+                        <span class="indicator">B</span>
+                        Мастер и Маргарита
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#book3" class="menu-link" data-index="3">
+                        <span class="indicator">C</span>
+                        Над пропастью во ржи
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#book4" class="menu-link" data-index="4">
+                        <span class="indicator">D</span>
+                        Преступление и наказание
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#book5" class="menu-link" data-index="5">
+                        <span class="indicator">E</span>
+                        Дюна
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Контент -->
+    <div class="content">
+
+        <!-- Книга 1 -->
+        <section id="book1" class="section active">
+            <img src="1984.jpg" alt="1984" class="book-image">
+            <div class="book-info">
+                <h1 class="book-title">1984</h1>
+                <p class="book-author">Джордж Оруэлл</p>
+                <p class="book-description">
+                    Классика антиутопии. Роман о тоталитарном обществе, где государство контролирует каждую мысль человека. 
+                    "Большой Брат следит за тобой" — одна из самых влиятельных книг XX века.
+                </p>
+            </div>
+        </section>
+
+        <!-- Книга 2 -->
+        <section id="book2" class="section">
+            <img src="MaM.jpg" alt="Мастер и Маргарита" class="book-image">
+            <div class="book-info">
+                <h1 class="book-title">Мастер и Маргарита</h1>
+                <p class="book-author">Михаил Булгаков</p>
+                <p class="book-description">
+                    Величайший роман русской литературы. Сатира, фантастика, любовь и философские размышления о добре и зле. 
+                    Воланд и его свита навсегда вошли в мировую культуру.
+                </p>
+            </div>
+        </section>
+
+        <!-- Книга 3 -->
+        <section id="book3" class="section">
+            <img src="NP.jpg" alt="Над пропастью во ржи" class="book-image">
+            <div class="book-info">
+                <h1 class="book-title">Над пропастью во ржи</h1>
+                <p class="book-author">Джером Дэвид Сэлинджер</p>
+                <p class="book-description">
+                    Культовый роман о взрослении, одиночестве и бунте подростка Холдена Колфилда. 
+                    Одна из самых читаемых книг в мире.
+                </p>
+            </div>
+        </section>
+
+        <!-- Книга 4 -->
+        <section id="book4" class="section">
+            <img src="CaP.jpg" alt="Преступление и наказание" class="book-image">
+            <div class="book-info">
+                <h1 class="book-title">Преступление и наказание</h1>
+                <p class="book-author">Фёдор Достоевский</p>
+                <p class="book-description">
+                    Глубочайшее психологическое исследование человеческой души. 
+                    История Раскольникова, который переступил моральную черту.
+                </p>
+            </div>
+        </section>
+
+        <!-- Книга 5 -->
+        <section id="book5" class="section">
+            <img src="Dune.jpg" alt="Дюна" class="book-image">
+            <div class="book-info">
+                <h1 class="book-title">Дюна</h1>
+                <p class="book-author">Фрэнк Герберт</p>
+                <p class="book-description">
+                    Эпическая научная фантастика. История Пола Атрейдеса на планете Арракис. 
+                    Одна из самых значимых книг в жанре sci-fi всех времён.
+                </p>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // Плавная прокрутка/активация секции
+        document.querySelectorAll('.menu-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                // Плавная прокрутка
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+
+                // Активация только выбранной секции
+                document.querySelectorAll('.section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                targetSection.classList.add('active');
+            });
+        });
+
+        // подсветка текущего пункта меню при скролле
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('.section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.menu-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

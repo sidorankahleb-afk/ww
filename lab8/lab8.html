@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Примеры селекторов JavaScript</title>
+    <style>
+        .active { background: #d4edda; font-weight: bold; }
+        img { width: 150px; margin: 5px; }
+    </style>
+</head>
+<body>
+
+    <h2>Меню</h2>
+    <div id="menu">
+        <ul>
+            <li class="active">Главная</li>
+            <li>О нас</li>
+            <li class="active">Каталог</li>
+            <li>Контакты</li>
+        </ul>
+    </div>
+
+    <h2>Галерея</h2>
+    <div id="gallery">
+        <img src="Dune.jpg" alt="Логотип">
+        <img src="Dune.jpg" alt="Фото">
+        <img src="Dune.jpg" alt="Логотип">
+        <img src="Dune.jpg" alt="Баннер">
+    </div>
+
+    <h2>Таблица товаров</h2>
+    <table id="product_table" border="1">
+        <tr>
+            <th>Товар</th>
+            <th>Склад</th>
+        </tr>
+        <tr data-stock="low">
+            <td>Ноутбук ASUS</td>
+            <td>Мало</td>
+        </tr>
+        <tr data-stock="normal">
+            <td>Монитор Samsung</td>
+            <td>В наличии</td>
+        </tr>
+        <tr data-stock="low">
+            <td>Клавиатура Logitech</td>
+            <td>Заканчивается</td>
+        </tr>
+    </table>
+
+    <hr>
+    <button onclick="selectAllExamples()">Выполнить все селекторы</button>
+
+    <div id="result"></div>
+
+    <script>
+        function selectAllExamples() {
+            let resultHTML = '<h3>Результаты отбора:</h3>';
+
+            // 1. Все элементы li с классом active внутри #menu
+            const activeItems = document.querySelectorAll('#menu li.active');
+            resultHTML += `<p><strong>1. li.active внутри #menu:</strong> ${activeItems.length} элементов</p>`;
+            activeItems.forEach((item, i) => {
+                resultHTML += `• ${item.textContent}<br>`;
+            });
+
+            // 2. Картинки, у которых alt начинается с "Логотип" внутри #gallery
+            const logos = document.querySelectorAll('#gallery img[alt^="Логотип"]');
+            resultHTML += `<p><strong>2. img[alt^="Логотип"] внутри #gallery:</strong> ${logos.length} изображений</p>`;
+            logos.forEach(img => {
+                resultHTML += `• ${img.alt}<br>`;
+            });
+
+            // 3. Элементы таблицы с data-stock="low" внутри #product_table
+            const lowStock = document.querySelectorAll('#product_table tr[data-stock="low"]');
+            resultHTML += `<p><strong>3. tr[data-stock="low"] внутри #product_table:</strong> ${lowStock.length} строк</p>`;
+            lowStock.forEach(row => {
+                const productName = row.cells[0].textContent;
+                resultHTML += `• ${productName}<br>`;
+            });
+
+            document.getElementById('result').innerHTML = resultHTML;
+        }
+
+        // Также можно получить наборы отдельно в переменные:
+        const activeMenuItems = document.querySelectorAll('#menu li.active');
+        const logoImages = document.querySelectorAll('#gallery img[alt^="Логотип"]');
+        const lowStockRows = document.querySelectorAll('#product_table tr[data-stock="low"]');
+
+        // Пример использования наборов
+        console.log('Активные пункты меню:', activeMenuItems);
+        console.log('Логотипы:', logoImages);
+        console.log('Товары с низким остатком:', lowStockRows);
+    </script>
+
+</body>
+</html>

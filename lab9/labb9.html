@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест jQuery</title>
+    
+    <!-- jQuery подключаем в head (можно и в конце body — тоже нормально) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+    <h1>Заголовок страницы</h1>
+    <p>Обычный текст</p>
+    
+    <img src="logo.jpg" alt="Логотип" style="width:200px;">
+    <img src="moto2.jpg" alt="Мотоцикл 2" style="width:200px;">
+    <img src="logo.jpg" alt="Другая картинка" style="width:200px;">
+
+    <header style="background:#eee; padding:20px;">
+        <h2>Это шапка сайта</h2>
+    </header>
+
+    <script>
+        $(document).ready(function() {
+            
+            console.log("jQuery успешно запущен!");
+
+            // 1. Скрываем все картинки с logo.jpg (лучший и самый надёжный способ)
+            $('img[src*="logo.jpg"]').hide(1500);
+
+            // 2. Скрываем все картинки, кроме первой, за 5 секунд
+            $('img').not(':first').hide(5000);
+
+            // 3. Второй мотоцикл — анимация рамки + скрытие шапки
+            $('img[src*="moto2.jpg"]')
+                .css({
+                    'border': '1px solid #333',
+                    'box-sizing': 'border-box'
+                })
+                .animate({ borderWidth: '10px' }, 4000)
+                .queue(function(next) {
+                    $('header').fadeOut(5000);
+                    next();
+                });
+
+            // 4. Добавляем новый абзац
+            $('<p>Это новый абзац, добавленный динамически с помощью jQuery.</p>')
+                .attr('id', 'newparagraph')
+                .appendTo('body')
+                .css({
+                    'background-color': '#111',
+                    'color': 'white',
+                    'padding': '25px',
+                    'margin': '30px 0',
+                    'font-size': '18px',
+                    'border-left': '5px solid #ff8800'
+                });
+
+            // Исправляем цвет текста по всей странице
+            $('body, html, p, div, span, h1, h2, h3, li, td, th').css('color', '#222222');
+
+        });
+    </script>
+
+</body>
+</html>

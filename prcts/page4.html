@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Страница 4 - Margin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(to bottom, #f0f4f8, #e6f0fa);
+            color: #333;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Header with menu */
+        header {
+            background: #1e3a8a;
+            color: white;
+            padding: 1rem 0;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .top-menu {
+            display: flex;
+            justify-content: center;
+        }
+
+        .top-menu ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .top-menu li {
+            position: relative;
+        }
+
+        .top-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            font-size: 1.1rem;
+            display: block;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .top-menu li:hover a {
+            background: #3b82f6;
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        /* Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        h1 {
+            color: #1e40af;
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: #3b82f6;
+        }
+
+        /* Block with float (left) */
+        .content-block {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            padding: 30px;
+            position: relative;
+        }
+
+        .float-image {
+            float: left;
+            margin: 0 25px 20px 0;
+            border: 5px solid #60a5fa;
+            border-radius: 12px;
+            width: 280px;
+            height: auto;
+            box-shadow: 8px 8px 15px rgba(0,0,0,0.15);
+        }
+
+        /* Three columns */
+        .columns {
+            display: flex;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .column {
+            flex: 1;
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 6px solid #3b82f6;
+        }
+
+        /* Fixed advertisement at the bottom */
+        .ad-block {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            color: white;
+            padding: 18px 35px;
+            border-radius: 50px;
+            box-shadow: 0 15px 30px rgba(239, 68, 68, 0.4);
+            font-weight: bold;
+            font-size: 1.3rem;
+            z-index: 9999;
+            white-space: nowrap;
+            border: 4px solid white;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.05); }
+            100% { transform: translateX(-50%) scale(1); }
+        }
+
+        /* Relative positioned element */
+        .highlight-box {
+            position: relative;
+            background: #fef3c7;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            border: 3px solid #fbbf24;
+        }
+
+        .highlight-box::before {
+            content: "★";
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            font-size: 2.5rem;
+            color: #fbbf24;
+        }
+
+        /* Absolute positioned element */
+        .absolute-note {
+            position: absolute;
+            top: 120px;
+            right: 40px;
+            background: #22c55e;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            font-weight: bold;
+            transform: rotate(-8deg);
+            z-index: 10;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #1e3a8a;
+            color: white;
+            margin-top: 60px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .columns {
+                flex-direction: column;
+            }
+            .float-image {
+                width: 100%;
+                float: none;
+                margin: 0 0 20px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav class="top-menu">
+                <ul>
+                    <li><a href="page4.html">Страница 4 — Margin</a></li>
+                    <li><a href="page5.html">Страница 5 — Позиционирование</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-content container">
+        <h1>Свойство margin</h1>
+
+        <div class="content-block">
+            <!-- Absolute positioned note -->
+            <div class="absolute-note">
+                Используем <strong>position: absolute</strong>
+            </div>
+
+            <img src="https://picsum.photos/id/1015/280/220" alt="Пример блочной модели" class="float-image">
+
+            <h2>Краткая информация</h2>
+            <table style="width:100%; border-collapse: collapse; margin: 20px 0;">
+                <tr><th style="background:#e0f2fe; padding:10px; text-align:left;">Значение по умолчанию</th><td style="padding:10px;">0</td></tr>
+                <tr><th style="background:#e0f2fe; padding:10px; text-align:left;">Наследуется</th><td style="padding:10px;">Нет</td></tr>
+                <tr><th style="background:#e0f2fe; padding:10px; text-align:left;">Применяется</th><td style="padding:10px;">Ко всем элементам</td></tr>
+            </table>
+
+            <p><strong>Свойство margin</strong> задаёт внешние отступы элемента. Оно является ключевой частью блочной модели CSS.</p>
+
+            <!-- Relative positioned box -->
+            <div class="highlight-box">
+                <strong>position: relative;</strong> — этот блок смещён относительно своего нормального положения.
+            </div>
+
+            <h2>Значения свойства margin</h2>
+            <ol>
+                <li><code>margin: 20px;</code> — одинаковые отступы со всех сторон</li>
+                <li><code>margin: 10px 30px;</code> — вертикальные и горизонтальные</li>
+                <li><code>margin: 10px 20px 30px;</code> — top, left/right, bottom</li>
+                <li><code>margin: 10px 20px 30px 40px;</code> — top, right, bottom, left</li>
+            </ol>
+
+            <!-- Three columns -->
+            <div class="columns">
+                <div class="column">
+                    <h3>Колонка 1</h3>
+                    <p>Внешние отступы позволяют создавать «воздух» между элементами, улучшая восприятие дизайна.</p>
+                </div>
+                <div class="column">
+                    <h3>Колонка 2</h3>
+                    <p>Можно использовать проценты, em, rem и другие относительные единицы для адаптивности.</p>
+                </div>
+                <div class="column">
+                    <h3>Колонка 3</h3>
+                    <p>Свойство margin отлично работает вместе с padding и border.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fixed advertising block at the bottom -->
+    <div class="ad-block">
+        🎉 Изучай CSS — стань веб-мастером! 
+    </div>
+
+    <footer>
+        <p>Лабораторная работа №10 • Вариант 4 • Все типы позиционирования использованы</p>
+        <p>Static • Relative • Absolute • Fixed • Float</p>
+    </footer>
+
+</body>
+</html>

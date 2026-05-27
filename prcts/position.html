@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История и основы CSS</title>
+    <style>
+        /* Общие стили в стиле присланных скриншотов */
+        body { 
+            margin: 0; 
+            font-family: Arial, sans-serif; 
+            background-color: #ffffff;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 { color: #669900; font-style: italic; text-align: center; }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; position: relative; }
+
+        /* 1. Позиционирование меню (Relative) */
+        .top-menu { 
+            background: #f4f4f4; 
+            padding: 10px; 
+            text-align: center;
+            border-bottom: 2px solid #669900;
+        }
+        .top-menu ul { list-style: none; padding: 0; margin: 0; }
+        .top-menu li { 
+            display: inline-block; 
+            margin: 0 5px;
+            position: relative; 
+        }
+        .top-menu a {
+            text-decoration: none;
+            color: #333;
+            background: #e2e2e2;
+            padding: 8px 15px;
+            border-radius: 5px;
+            display: block;
+            transition: 0.3s;
+        }
+        .top-menu a:hover { background: #669900; color: white; }
+
+        /* 2. Плавающие элементы (Float) - Карточки создателей */
+        .creators-section { overflow: hidden; margin: 20px 0; border: 1px solid #ccc; padding: 15px; }
+        .creator-card { 
+            float: left; 
+            width: 46%; 
+            margin: 2%; 
+            text-align: center;
+        }
+        .creator-card img {
+            width: 150px;
+            height: 200px;
+            object-fit: cover;
+            border: 1px solid #999;
+        }
+
+        /* 3. Фиксированный блок (Fixed) - Сравнение CSS2 и CSS3 */
+        .stats-fixed {
+            position: fixed; 
+            bottom: 20px;
+            right: 20px;
+            width: 250px;
+            padding: 15px;
+            background: #d9edf7;
+            border: 2px solid #bce8f1;
+            border-radius: 10px;
+            z-index: 1000;
+            font-size: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 4. Абсолютное позиционирование (Absolute) - Номер страницы */
+        .page-number {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: #0066cc;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        /* Таблица из материалов */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        .table-header { background-color: #f9f9f9; font-weight: bold; }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .logo-text { font-size: 40px; font-weight: bold; }
+        .blue { color: #0066cc; } .green { color: #669900; } .orange { color: #ff9900; }
+    </style>
+</head>
+<body>
+
+    <div class="top-menu">
+        <ul>
+            <li><a href="#">Определение CSS</a></li>
+            <li><a href="#">Создатели</a></li>
+            <li><a href="#">Таблицы</a></li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div class="page-number">Приложение А <br> Страница 1</div>
+
+        <h2>Определение CSS</h2>
+        <p>Каскадные таблицы стилей (CSS) — это мощный механизм, позволяющий описать правила оформления HTML документа, отделить их от содержания.</p>
+
+        <h3>Создатели</h3>
+        <div class="creators-section">
+            <div class="creator-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Sir_Tim_Berners-Lee.jpg" alt="Тим Бернерс-Ли">
+                <p><strong>Тим Бернерс-Ли</strong><br>Изобретатель URI, URL, HTTP, HTML.</p>
+            </div>
+            <div class="creator-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/bc/H%C3%A5kon_Wium_Lie_2009-03-13.jpg" alt="Хокон Виум Ли">
+                <p><strong>Хокон Виум Ли</strong><br>Предложил концепцию каскадных таблиц стилей.</p>
+            </div>
+        </div>
+
+        <h3>Сравнение версий</h3>
+        <table>
+            <tr class="table-header">
+                <td>Показатель</td>
+                <td>CSS2</td>
+                <td>CSS3</td>
+                <td>Результат</td>
+            </tr>
+            <tr>
+                <td>Время разработки</td>
+                <td>73 минут</td>
+                <td>49 минут</td>
+                <td>CSS3 33% быстрее</td>
+            </tr>
+            <tr>
+                <td>Размер</td>
+                <td>849.2 KB</td>
+                <td>767.9 KB</td>
+                <td>CSS3 9.5% меньше</td>
+            </tr>
+        </table>
+
+        <div class="logo-area">
+            <div class="logo-text">
+                <span class="blue">Л</span><span class="orange">о</span><span class="green">г</span><span class="orange">о</span>
+            </div>
+            <img src="https://via.placeholder.com/400x40/eee/999?text=Константин+Костатинополь...+++Сообщения(3)+++Настройки" alt="UI Menu">
+        </div>
+    </div>
+
+    <div class="stats-fixed" id="stats">
+        <h4 style="margin-top:0">Справка CSS 3</h4>
+        <p>Запросы сократились на 45% по сравнению с CSS 2.</p>
+        <button onclick="closeStats()">Понятно</button>
+    </div>
+
+    <script>
+        function closeStats() {
+            document.getElementById('stats').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

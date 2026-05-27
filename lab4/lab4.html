@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Бланк заказа — Кафе</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 780px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    h1 { text-align: center; color: #2c3e50; }
+    .dish {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      margin: 16px 0;
+      background: #f9f9f9;
+    }
+    .dish h3 {
+      margin: 0 0 12px 0;
+      color: #2980b9;
+    }
+    .size-group {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 8px;
+    }
+    .size-group label {
+      cursor: pointer;
+      user-select: none;
+    }
+    .price {
+      font-weight: bold;
+      color: #27ae60;
+      min-height: 1.4em;
+    }
+    .summary {
+      margin-top: 40px;
+      padding: 24px;
+      background: #ecf0f1;
+      border-radius: 10px;
+      border: 2px solid #3498db;
+    }
+    .summary h2 { margin-top: 0; color: #2c3e50; }
+    .line { display: flex; justify-content: space-between; margin: 10px 0; }
+    .total { font-size: 1.3em; font-weight: bold; border-top: 2px solid #95a5a6; padding-top: 12px; }
+    .gift { color: #e67e22; font-weight: bold; }
+    .free { color: #27ae60; font-weight: bold; }
+
+    /* Стили для кнопки */
+    .submit-btn {
+      display: block;
+      width: 100%;
+      max-width: 400px;
+      margin: 30px auto 0;
+      padding: 16px 24px;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: white;
+      background: linear-gradient(135deg, #27ae60, #2ecc71);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .submit-btn:hover {
+      background: linear-gradient(135deg, #219a52, #27ae60);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 15px rgba(39, 174, 96, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+<h1>Сделайте заказ</h1>
+
+<form id="orderForm">
+
+  <!-- Все ваши блюда остаются без изменений -->
+  <div class="dish" data-base-price="48">
+    <h3>Стейк из мраморной говядины</h3>
+    <div class="size-group">
+      <label><input type="radio" name="dish1" value="small" checked> Маленькая — 48 BYN</label>
+      <label><input type="radio" name="dish1" value="medium"> Средняя — 72 BYN</label>
+      <label><input type="radio" name="dish1" value="large"> Большая — 98 BYN</label>
+    </div>
+    <div class="price">48 BYN</div>
+  </div>
+
+  <div class="dish" data-base-price="39">
+    <h3>Лосось на гриле с лимоном</h3>
+    <div class="size-group">
+      <label><input type="radio" name="dish2" value="small" checked> Маленькая — 39 BYN</label>
+      <label><input type="radio" name="dish2" value="medium"> Средняя — 59 BYN</label>
+      <label><input type="radio" name="dish2" value="large"> Большая — 82 BYN</label>
+    </div>
+    <div class="price">39 BYN</div>
+  </div>
+
+  <div class="dish" data-base-price="32">
+    <h3>Паста Карбонара</h3>
+    <div class="size-group">
+      <label><input type="radio" name="dish3" value="small" checked> Маленькая — 32 BYN</label>
+      <label><input type="radio" name="dish3" value="medium"> Средняя — 48 BYN</label>
+      <label><input type="radio" name="dish3" value="large"> Большая — 65 BYN</label>
+    </div>
+    <div class="price">32 BYN</div>
+  </div>
+
+  <div class="dish" data-base-price="26">
+    <h3>Цезарь с курицей</h3>
+    <div class="size-group">
+      <label><input type="radio" name="dish4" value="small" checked> Маленькая — 26 BYN</label>
+      <label><input type="radio" name="dish4" value="medium"> Средняя — 39 BYN</label>
+      <label><input type="radio" name="dish4" value="large"> Большая — 52 BYN</label>
+    </div>
+    <div class="price">26 BYN</div>
+  </div>
+
+  <div class="dish" data-base-price="21">
+    <h3>Ризотто с грибами</h3>
+    <div class="size-group">
+      <label><input type="radio" name="dish5" value="small" checked> Маленькая — 21 BYN</label>
+      <label><input type="radio" name="dish5" value="medium"> Средняя — 34 BYN</label>
+      <label><input type="radio" name="dish5" value="large"> Большая — 46 BYN</label>
+    </div>
+    <div class="price">21 BYN</div>
+  </div>
+
+  <div style="margin: 30px 0;">
+    <label>Нужна доставка?</label><br><br>
+    <select id="delivery">
+      <option value="no">Нет, заберу сам</option>
+      <option value="yes">Да, нужна доставка</option>
+    </select>
+  </div>
+
+  <div class="summary">
+    <h2>Ваш заказ</h2>
+    <div class="line"><span>Сумма блюд:</span> <span id="sumDishes">0 BYN</span></div>
+    <div class="line"><span>Бесплатный напиток:</span> <span id="gift">—</span></div>
+    <div class="line"><span>Доставка:</span> <span id="deliveryCost">0 BYN</span></div>
+    <div class="line total"><span>Итого к оплате:</span> <span id="total">0 BYN</span></div>
+  </div>
+
+  <button type="submit" class="submit-btn">Оформить заказ</button>
+
+</form>
+
+<script>
+const prices = {
+  small:   1.00,
+  medium:  1.50,
+  large:   2.05    
+};
+
+const dishes = document.querySelectorAll('.dish');
+const deliverySelect = document.getElementById('delivery');
+
+function updateOrder() {
+  let total = 0;
+  let largeCount = 0;
+
+  dishes.forEach(dish => {
+    const radios = dish.querySelectorAll('input[type="radio"]');
+    let selectedPrice = 0;
+
+    radios.forEach(radio => {
+      if (radio.checked) {
+        const size = radio.value;
+        const base = Number(dish.dataset.basePrice);
+        selectedPrice = Math.round(base * prices[size]);
+
+        if (size === 'large') {
+          largeCount++;
+        }
+      }
+    });
+
+    dish.querySelector('.price').textContent = selectedPrice + ' BYN';
+    total += selectedPrice;
+  });
+
+  // Подарок за 3+ большие порции
+  const hasGift = largeCount >= 3;
+  document.getElementById('gift').textContent = hasGift 
+    ? 'да (бесплатно) ☕' 
+    : 'нет';
+  document.getElementById('gift').className = hasGift ? 'gift' : '';
+
+  // Доставка
+  const needDelivery = deliverySelect.value === 'yes';
+  let deliveryCost = 0;
+
+  if (needDelivery) {
+    if (largeCount >= 4) {
+      deliveryCost = 0;
+    } else {
+      deliveryCost = Math.round(total * 0.05);
+    }
+  }
+
+  document.getElementById('deliveryCost').textContent = 
+    deliveryCost > 0 ? deliveryCost + ' BYN' : '0 BYN (бесплатно)';
+
+  const finalTotal = total + deliveryCost;
+  document.getElementById('sumDishes').textContent = total + ' BYN';
+  document.getElementById('total').textContent = finalTotal + ' BYN';
+}
+
+// Обработчики изменений
+dishes.forEach(dish => {
+  dish.querySelectorAll('input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', updateOrder);
+  });
+});
+
+deliverySelect.addEventListener('change', updateOrder);
+
+document.getElementById('orderForm').addEventListener('submit', function(e) {
+  e.preventDefault(); 
+  const total = document.getElementById('total').textContent;
+  
+  alert(`✅ Заказ успешно оформлен!\n\n` +
+        `Итого к оплате: ${total}\n\n` +
+        `Спасибо! Ваш заказ скоро будет готов 🍽️`);
+  
+});
+
+updateOrder();
+</script>
+
+</body>
+</html>
